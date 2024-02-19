@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app
+  namespace: default
+spec:
+  destination:
+    name: in-cluster
+    namespace: default
+  source:
+    repoURL: https://github.com/Nerogen/chart_nginx_argocd.git
+    path: ./app.yaml
+    targetRevision: master  # или другая ветка/тег в вашем репозитории
+  project: default
+
+  # Sync policy
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+
+  # Helm specific settings
+  helm:
+    valueFiles:
+    - ./chart/values.yaml
+    releaseName: my-release  # укажите имя вашего релиза Helm
+    chart: ./chart/  # укажите путь к вашему Helm-чарту
+    version: 1.2.3  # укажите версию вашего Helm-чарта
+    set:
+      - name: key
+        value: value
