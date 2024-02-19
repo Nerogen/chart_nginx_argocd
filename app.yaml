@@ -22,13 +22,9 @@ spec:
     - CreateNamespace=true
 
   # Helm specific settings
-  sourceType: Helm
+  chart: ./chart/  # укажите путь к вашему Helm-чарту
+  revision: 1.2.3  # укажите версию вашего Helm-чарта
   helm:
-    valueFiles:
+    values:
     - ./chart/values.yaml
     releaseName: my-release  # укажите имя вашего релиза Helm
-    chart: ./chart/  # укажите путь к вашему Helm-чарту
-    version: 1.2.3  # укажите версию вашего Helm-чарта
-    set:
-      - name: key
-        value: value
