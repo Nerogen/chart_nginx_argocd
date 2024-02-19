@@ -1,22 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-app
-  namespace: default
+  name: my-app-new
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    name: in-cluster
     namespace: default
-  project: default
+    server: 'https://kubernetes.default.svc'
   source:
-    path: ./app.yaml
-    repoURL: https://github.com/Nerogen/chart_nginx_argocd.git
+    path: chart
+    repoURL: 'https://github.com/Nerogen/chart_nginx_argocd.git'
     targetRevision: master
     helm:
       valueFiles:
-        - chart/values.yaml
+        - values.yaml
+  project: default
   syncPolicy:
     automated:
       prune: true
