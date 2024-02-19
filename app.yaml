@@ -3,28 +3,21 @@ kind: Application
 metadata:
   name: my-app
   namespace: default
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     name: in-cluster
     namespace: default
-  source:
-    repoURL: https://github.com/Nerogen/chart_nginx_argocd.git
-    path: ./app.yaml
-    targetRevision: master  # или другая ветка/тег в вашем репозитории
   project: default
-
-  # Sync policy
+  source:
+    path: ./app.yaml
+    repoURL: https://github.com/Nerogen/chart_nginx_argocd.git
+    targetRevision: master
+    helm:
+      valueFiles:
+        - chart/values.yaml
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
-
-  # Helm specific settings
-  chart: ./chart/  # укажите путь к вашему Helm-чарту
-  revision: 1.2.3  # укажите версию вашего Helm-чарта
-  helm:
-    values:
-    - ./chart/values.yaml
-    releaseName: my-release  # укажите имя вашего релиза Helm
