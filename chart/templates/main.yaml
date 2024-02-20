@@ -129,7 +129,7 @@ data:
     <body>
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="">Welcome to my NGINX service!!!</a>
+                <a class="navbar-brand" href="">Welcome to my NGINX service!</a>
             </nav>
         </header>
     
@@ -347,3 +347,19 @@ spec:
     - port: 80
       targetPort: 80
       nodePort: 30008
+
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx-deployment
+    namespace: default
+  minReplicas: 1
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 25
