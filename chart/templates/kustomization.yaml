@@ -2,6 +2,3 @@
 images:
   - name: danwhite123/nginx-image
     newTag: v1.0.0
-
-resources:
-  - ../../
