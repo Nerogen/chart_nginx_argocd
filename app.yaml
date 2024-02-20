@@ -21,7 +21,7 @@ spec:
         - name: "image.repository"
           value: danwhite123/nginx-image
         - name: "image.tag"
-          value: v1.0
+          value: v1.0.0
   project: default
   syncPolicy:
     automated:
