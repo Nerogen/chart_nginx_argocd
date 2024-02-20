@@ -17,7 +17,8 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: danwhite123/nginx-image
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: { { .Values.image.pullPolicy } }
         resources:
           requests:
             cpu: 100m

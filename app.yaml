@@ -15,8 +15,13 @@ spec:
     repoURL: 'https://github.com/Nerogen/chart_nginx_argocd.git'
     targetRevision: master
     helm:
-      valueFiles:
-        - values.yaml
+      parameters:
+        - name: "replicaCount"
+          value: "1"
+        - name: "image.repository"
+          value: danwhite123/nginx-image
+        - name: "image.tag"
+          value: v1.0
   project: default
   syncPolicy:
     automated:
