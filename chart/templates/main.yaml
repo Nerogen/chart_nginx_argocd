@@ -348,18 +348,3 @@ spec:
       targetPort: 80
       nodePort: 30008
 
-
----
-apiVersion: autoscaling/v1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: nginx-hpa
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: nginx-deployment
-    namespace: default
-  minReplicas: 1
-  maxReplicas: 4
-  targetCPUUtilizationPercentage: 25
