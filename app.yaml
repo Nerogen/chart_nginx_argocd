@@ -33,8 +33,4 @@ spec:
       - CreateNamespace=false
       - PrunePropagationPolicy=foreground
       - PruneLast=true
-  ignoreDifferences:
-  - group: argoproj.io
-    kind: Rollout
-    jsonPointers:
-      - /spec/replicas
+
